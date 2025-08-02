@@ -7,6 +7,7 @@ import IconButton from '@/components/IconButton.vue';
 import { ref } from 'vue';
 import { FormInterface } from '@/interfaces/form.interface';
 import BaseSelect from '@/components/BaseSelect.vue';
+import RowsInput from '@/components/RowsInput.vue';
 
 const recordTypeOptions = [
   { selectLabel: 'Локальная', selectValue: 'local' },
@@ -45,7 +46,7 @@ const form = ref<FormInterface>({
           </div>
 
           <div v-for="n in 3" :key="n" class="accounts-section__row">
-            <BaseInput
+            <RowsInput
               v-model="form.recordLabel"
               placeholder="Введите метку"
               name="label"

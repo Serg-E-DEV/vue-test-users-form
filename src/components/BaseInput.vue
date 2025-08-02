@@ -3,15 +3,23 @@ const model = defineModel<string>({ required: true, default: '' });
 interface Props {
   type?: string;
   placeholder?: string;
+  disabled?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   type: 'text',
   placeholder: 'Введите значение',
+  disabled: false,
 });
 </script>
 
 <template>
-  <input v-model="model" :type="props.type" :placeholder="props.placeholder" class="base-input" />
+  <input
+    v-model="model"
+    :type="props.type"
+    :placeholder="props.placeholder"
+    :disabled="disabled"
+    class="base-input"
+  />
 </template>
 
 <style scoped></style>
