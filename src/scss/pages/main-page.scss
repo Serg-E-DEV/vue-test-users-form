@@ -1,0 +1,18 @@
+.main-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &__aside {
+    flex-shrink: 0;
+    flex-basis: 320px;
+  }
+
+  &__main {
+    flex-grow: 1;
+  }
+
+  @media (width >= 992px) {
+    flex-direction: row;
+  }
+}

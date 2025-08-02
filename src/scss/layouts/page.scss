@@ -1,0 +1,7 @@
+.page {
+  padding-block: 80px;
+
+  @media (width >= 650px) {
+    padding-block: 140px;
+  }
+}

@@ -1,0 +1,26 @@
+@use '@/scss/common/typography' as typography;
+
+.base-input {
+  @include typography.main-text(24px, 400);
+
+  min-width: 180px;
+  min-height: 52px;
+  padding-inline: 4px;
+  padding-block: 18px 4px;
+  font-family: inherit;
+  color: var(--color-text);
+  background: var(--color-blank);
+  border: none;
+  border-radius: 0;
+  transition: padding var(--duration);
+  border-bottom: 1px solid var(--color-black);
+
+  &:focus {
+    padding-block: 0;
+    border: none;
+  }
+
+  &::placeholder {
+    color: var(--color-text-light);
+  }
+}

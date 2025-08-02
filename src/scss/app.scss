@@ -1,0 +1,37 @@
+@use 'common/typography' as typography;
+@use 'common/variables';
+@use 'base/reset/reset-button';
+@use 'base/styles/line-clamp-style';
+@use 'base/base-button';
+@use 'base/base-input';
+@use 'base/sprite-icon';
+@use 'base/icon-button';
+@use 'base/base-form';
+@use 'layouts/page';
+@use 'layouts/section';
+@use 'pages/main-page';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-width: var(--layout-min-width);
+  font: var(--font-body);
+  color: var(--color-text);
+}
+
+h1 {
+  font: var(--font-heading);
+}
+
+/*
+ breakpoints:
+   576:
+   768:
+   992:
+   1200:
+   1400:
+*/
