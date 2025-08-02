@@ -1,7 +1,7 @@
 :root {
   // LAYOUTS
-  --layout-width: 1440px;
-  --layout-min-width: 300px;
+  --layout-width: 992px;
+  --layout-min-width: 650px;
 
   // FONTS
   --font-family: 'Roboto', sans-serif;
@@ -18,6 +18,8 @@
   --color-grey: #3a434f;
   --color-grey-dark: #666;
   --color-yellow: #fabc48;
+  --color-yellow-light: #fff8e6;
+  --color-orange-dark: #b35c00;
   --color-green: #49d3aa;
   --color-blue: #5460e6ff;
   --color-text: var(--color-black);
@@ -28,6 +30,7 @@
   --color-border: #1c1c1c66;
 
   // RADIUSES
+  --radius-s: 4px;
   --radius: 8px;
   --radius-l: 12px;
   --radius-xl: 20px;

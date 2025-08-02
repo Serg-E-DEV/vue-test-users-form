@@ -1,19 +1,17 @@
 @use '@/scss/common/typography' as typography;
 
 .base-input {
-  @include typography.main-text(24px, 400);
+  @include typography.main-text(16px, 400);
 
-  min-width: 180px;
-  min-height: 52px;
-  padding-inline: 4px;
-  padding-block: 18px 4px;
+  min-width: 140px;
+  min-height: 32px;
+  padding-inline: 8px;
   font-family: inherit;
   color: var(--color-text);
   background: var(--color-blank);
-  border: none;
-  border-radius: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-s);
   transition: padding var(--duration);
-  border-bottom: 1px solid var(--color-black);
 
   &:focus {
     padding-block: 0;
@@ -22,5 +20,9 @@
 
   &::placeholder {
     color: var(--color-text-light);
+  }
+
+  &[type='password'] {
+    font-size: 24px;
   }
 }

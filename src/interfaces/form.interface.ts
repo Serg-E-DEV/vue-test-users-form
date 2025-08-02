@@ -1,4 +1,6 @@
 export interface FormInterface {
-  email?: string;
+  recordLabel?: string;
+  login?: string;
+  recordType?: string;
   password?: string;
 }

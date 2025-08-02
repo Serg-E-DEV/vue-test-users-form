@@ -1,4 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="49" fill="none">
-  <rect width="48" height="48" y=".5" fill="currentColor" rx="24"/>
-  <path stroke="#fff" stroke-linecap="round" stroke-width="2" d="M24 16.82v15.36m7.68-7.68H16.32"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px}
+    </style>
+  </defs>
+  <g id="plus">
+    <path d="M16 7v18M7 16h18" class="cls-1"/>
+  </g>
 </svg>

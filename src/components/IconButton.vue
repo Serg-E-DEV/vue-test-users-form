@@ -5,14 +5,14 @@ import SpriteIcon from '@/components/SpriteIcon.vue';
 interface Props {
   sprite?: string;
   icon: string;
-  width?: string;
-  height?: string;
+  width?: number;
+  height?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   sprite: 'main',
-  width: '16',
-  height: '16',
+  width: 24,
+  height: 24,
 });
 </script>
 

@@ -14,9 +14,9 @@
   font-family: inherit;
   color: var(--base-button-color, var(--color-text));
   background: var(--base-button-background, transparent);
-  border: none;
-  border-radius: 26px;
-  transition: background var(--duration);
+  border: var(--base-button-border, none);
+  border-radius: var(--radius);
+  transition: var(--duration);
   cursor: pointer;
 
   &:disabled {
@@ -27,6 +27,18 @@
     &_primary {
       --base-button-color: var(--color-blank);
       --base-button-background: var(--color-black);
+    }
+
+    &_ghost {
+      --base-button-color: var(--color-text);
+      --base-button-border: 1px solid var(--color-border);
+    }
+  }
+
+  &_shape {
+    &_square {
+      padding: 0;
+      aspect-ratio: 1;
     }
   }
 
@@ -40,9 +52,9 @@
 
   @media (hover: hover) and (pointer: fine) {
     &_theme {
-      &_primary {
+      &_ghost {
         &:hover {
-          --base-button-background: var(--color-grey);
+          --base-button-border: 1px solid var(--color-black);
         }
       }
     }

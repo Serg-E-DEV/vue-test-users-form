@@ -4,12 +4,15 @@
 @use 'base/styles/line-clamp-style';
 @use 'base/base-button';
 @use 'base/base-input';
+@use 'base/base-select';
 @use 'base/sprite-icon';
 @use 'base/icon-button';
 @use 'base/base-form';
+@use 'base/base-hint';
 @use 'layouts/page';
 @use 'layouts/section';
 @use 'pages/main-page';
+@use 'sections/accounts-section';
 
 * {
   box-sizing: border-box;
