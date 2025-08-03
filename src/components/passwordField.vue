@@ -7,12 +7,14 @@ import { computed, ref } from 'vue';
 const model = defineModel<string>({ required: true, default: '' });
 
 interface Props {
+  name?: string;
   placeholder?: string;
   disabled?: boolean;
   required?: boolean;
 }
 
 withDefaults(defineProps<Props>(), {
+  name: 'password',
   placeholder: 'Введите пароль',
   disabled: false,
   required: false,
@@ -29,7 +31,7 @@ const inputType = computed(() => (isVisible.value ? 'text' : 'password'));
       :type="inputType"
       class="password-field__input"
       :placeholder="placeholder"
-      name="password"
+      :name="name"
       :required="required"
     />
     <IconButton

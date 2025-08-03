@@ -18,28 +18,4 @@
     flex-direction: column;
     row-gap: 8px;
   }
-
-  &__row {
-    display: grid;
-    align-items: center;
-    column-gap: 16px;
-    grid-template-columns: 1fr 0.7fr 1fr 1fr 24px;
-
-    &_head {
-      font: var(--font-body-s);
-      color: var(--color-text-light);
-    }
-  }
-
-  &__row-item {
-    min-width: 120px;
-
-    &_double {
-      grid-column: span 2;
-    }
-  }
-
-  &__column-heading {
-    font: var(--font-body-s);
-  }
 }
