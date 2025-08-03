@@ -4,8 +4,6 @@ import BaseInput from '@/components/BaseInput.vue';
 
 import { computed, ref } from 'vue';
 
-const model = defineModel<string>({ required: true, default: '' });
-
 interface Props {
   name?: string;
   placeholder?: string;
@@ -20,14 +18,21 @@ withDefaults(defineProps<Props>(), {
   required: false,
 });
 
+const model = defineModel<string | null>({ required: true, default: '' });
+
 const isVisible = ref(false);
 const inputType = computed(() => (isVisible.value ? 'text' : 'password'));
+
+const normalizedModel = computed({
+  get: () => model.value ?? '',
+  set: (val) => (model.value = val),
+});
 </script>
 
 <template>
   <div class="password-field">
     <BaseInput
-      v-model="model"
+      v-model="normalizedModel"
       :type="inputType"
       class="password-field__input"
       :placeholder="placeholder"

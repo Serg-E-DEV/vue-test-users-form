@@ -5,23 +5,48 @@ import PasswordField from '@/components/passwordField.vue';
 import BaseInput from '@/components/BaseInput.vue';
 import BaseSelect from '@/components/BaseSelect.vue';
 
-import { ref, watch } from 'vue';
+import { reactive, watch } from 'vue';
+import { useAccountsStore } from '@/stores/accounts.store';
+import { AccountInterface } from '@/interfaces/account.interface';
 import { FormInterface } from '@/interfaces/form.interface';
+
+interface Props {
+  account: AccountInterface;
+}
+
+const props = defineProps<Props>();
+
+const accountsStore = useAccountsStore();
 
 const recordTypeOptions = [
   { selectLabel: 'Локальная', selectValue: 'local' },
   { selectLabel: 'LDAP', selectValue: 'ldap' },
 ];
 
-const form = ref<FormInterface>({
-  recordType: recordTypeOptions[0].selectValue,
+const form = reactive<FormInterface>({
+  recordLabel: props.account.recordLabel,
+  recordType: props.account.recordType,
+  login: props.account.login,
+  password: props.account.password,
 });
 
+function onRemove() {
+  accountsStore.removeAccount(props.account.id);
+}
+
 watch(
-  () => form.value.recordType,
+  () => ({ ...form }),
+  (newValue) => {
+    accountsStore.updateAccount({ id: props.account.id, ...newValue });
+  },
+  { deep: true }
+);
+
+watch(
+  () => form.recordType,
   (newType) => {
     if (newType === 'ldap') {
-      form.value.password = null;
+      form.password = null;
     }
   }
 );
@@ -53,7 +78,7 @@ watch(
       maxlength="100"
       required
     />
-    <IconButton icon="trash" />
+    <IconButton icon="trash" @click="onRemove" />
   </div>
 </template>
 

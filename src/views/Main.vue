@@ -2,6 +2,10 @@
 import SpriteIcon from '@/components/SpriteIcon.vue';
 import BaseButton from '@/components/BaseButton.vue';
 import AccountRow from '@/components/AccountRow.vue';
+
+import { useAccountsStore } from '@/stores/accounts.store';
+
+const accountsStore = useAccountsStore();
 </script>
 
 <template>
@@ -10,7 +14,7 @@ import AccountRow from '@/components/AccountRow.vue';
       <section class="accounts-section">
         <div class="accounts-section__header">
           <h1 class="accounts-section__title">Учетные записи</h1>
-          <BaseButton theme="ghost" shape="square">
+          <BaseButton theme="ghost" shape="square" @click="accountsStore.createAccount()">
             <SpriteIcon icon="add" />
           </BaseButton>
         </div>
@@ -29,8 +33,14 @@ import AccountRow from '@/components/AccountRow.vue';
             <span class="accounts-section__row-item">Логин</span>
             <span class="accounts-section__row-item accounts-section__row-item_double">Пароль</span>
           </div>
-          <AccountRow v-for="n in 3" :key="n" class="accounts-section__row" />
+          <AccountRow
+            v-for="account in accountsStore.accounts"
+            :key="account.id"
+            :account="account"
+            class="accounts-section__row"
+          />
         </div>
+        {{ accountsStore.accounts }}
       </section>
     </main>
   </div>

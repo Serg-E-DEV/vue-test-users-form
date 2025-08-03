@@ -1,6 +1,7 @@
-export interface FormInterface {
+export interface AccountInterface {
+  id: string;
   recordLabel: string;
-  login: string;
   recordType: 'local' | 'ldap';
+  login: string;
   password: string | null;
 }
