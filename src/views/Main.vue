@@ -28,10 +28,10 @@ const accountsStore = useAccountsStore();
 
         <div class="accounts-section__rows">
           <div class="account-row account-row_head">
-            <span class="accounts-section__row-item">Метки</span>
-            <span class="accounts-section__row-item">Тип записи</span>
-            <span class="accounts-section__row-item">Логин</span>
-            <span class="accounts-section__row-item accounts-section__row-item_double">Пароль</span>
+            <span class="account-row__item">Метки</span>
+            <span class="account-row__item">Тип записи</span>
+            <span class="account-row__item">Логин</span>
+            <span class="account-row__item account-row__item_double">Пароль</span>
           </div>
           <AccountRow
             v-for="account in accountsStore.accounts"

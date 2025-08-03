@@ -100,7 +100,9 @@ const passwordModel = computed({
     />
     <BaseSelect
       v-model="form.recordType"
+      class="account-row__item"
       :select-options="recordTypeOptions"
+      name="record-type"
       @change="updateIfValid()"
     />
     <BaseInput

@@ -19,7 +19,7 @@ withDefaults(
 <template>
   <select
     v-model="model"
-    class="base-input base-select accounts-section__row-item"
+    class="base-input base-select"
     :disabled="disabled"
     @change="(e) => emit('change', e)"
   >
