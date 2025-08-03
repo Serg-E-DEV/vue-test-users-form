@@ -1,11 +1,13 @@
 <script setup lang="ts">
 const model = defineModel<string>({ required: true });
 
-type Option = string | { selectValue: string; selectLabel: string };
+const emit = defineEmits(['change']);
+
+type SelectOption = string | { selectValue: string; selectLabel: string };
 
 withDefaults(
   defineProps<{
-    options: Option[];
+    selectOptions: SelectOption[];
     disabled?: boolean;
   }>(),
   {
@@ -19,13 +21,14 @@ withDefaults(
     v-model="model"
     class="base-input base-select accounts-section__row-item"
     :disabled="disabled"
+    @change="(e) => emit('change', e)"
   >
     <option
-      v-for="(option, i) in options"
+      v-for="(selectOption, i) in selectOptions"
       :key="i"
-      :value="typeof option === 'string' ? option : option.selectValue"
+      :value="typeof selectOption === 'string' ? selectOption : selectOption.selectValue"
     >
-      {{ typeof option === 'string' ? option : option.selectLabel }}
+      {{ typeof selectOption === 'string' ? selectOption : selectOption.selectLabel }}
     </option>
   </select>
 </template>

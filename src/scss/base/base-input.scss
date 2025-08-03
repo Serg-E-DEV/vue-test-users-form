@@ -9,11 +9,20 @@
   font-family: inherit;
   color: var(--color-text);
   background: var(--color-blank);
-  border: 1px solid var(--color-border);
+  border: var(--base-input-border, 1px solid var(--color-border));
   border-radius: var(--radius-s);
-  transition: var(--duration);
 
   &::placeholder {
     color: var(--color-text-light);
+  }
+
+  &_invalid {
+    --base-input-border: 2px solid var(--color-red);
+
+    &:focus {
+      outline: none;
+
+      --base-input-border: 2px solid var(--color-red);
+    }
   }
 }

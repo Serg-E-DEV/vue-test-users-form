@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ModelRef, onMounted, onUpdated, ref } from 'vue';
-import { normalizeLabelsInput } from '@/modules/utils';
 
 const model = defineModel({ required: true, default: '' }) as ModelRef<string>;
 
@@ -41,7 +40,6 @@ onUpdated(() => {
     class="base-input rows-input"
     rows="1"
     maxlength="70"
-    @blur="model = normalizeLabelsInput(model)"
   />
 </template>
 

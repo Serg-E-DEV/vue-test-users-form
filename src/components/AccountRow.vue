@@ -1,15 +1,23 @@
 <script setup lang="ts">
 import RowsInput from '@/components/RowsInput.vue';
 import IconButton from '@/components/IconButton.vue';
-import PasswordField from '@/components/passwordField.vue';
+import PasswordField from '@/components/PasswordField.vue';
 import BaseInput from '@/components/BaseInput.vue';
 import BaseSelect from '@/components/BaseSelect.vue';
 
-import { reactive, watch } from 'vue';
-import { useAccountsStore } from '@/stores/accounts.store';
-import { stringToRecordLabels } from '@/modules/utils';
 import { FormInterface } from '@/interfaces/form.interface';
 import { AccountInterface } from '@/interfaces/account.interface';
+import { ErrorsInterface } from '@/interfaces/errors.interface';
+
+import { computed, reactive, watch } from 'vue';
+import { useAccountsStore } from '@/stores/accounts.store';
+import {
+  normalizeLabelsInput,
+  normalizeLoginInput,
+  normalizePasswordInput,
+  stringToRecordLabels,
+} from '@/modules/utils';
+import { validateForm } from '@/modules/validateForm';
 
 interface Props {
   account: AccountInterface;
@@ -31,21 +39,30 @@ const form = reactive<FormInterface>({
   password: props.account.password,
 });
 
+const errors = reactive<ErrorsInterface>({
+  recordLabels: false,
+  login: false,
+  password: false,
+  recordType: false,
+});
+
 function onRemove() {
   accountsStore.removeAccount(props.account.id);
 }
 
-watch(
-  () => ({ ...form }),
-  (changedForm) => {
-    accountsStore.updateAccount({
-      id: props.account.id,
-      ...changedForm,
-      recordLabels: stringToRecordLabels(changedForm.recordLabels),
-    });
-  },
-  { deep: true }
-);
+function updateIfValid() {
+  if (!validateForm(form, errors)) {
+    console.error('Валидация не пройдена');
+    console.log(form, errors);
+    return;
+  }
+
+  accountsStore.updateAccount({
+    id: props.account.id,
+    ...form,
+    recordLabels: stringToRecordLabels(form.recordLabels),
+  });
+}
 
 watch(
   () => form.recordType,
@@ -55,33 +72,62 @@ watch(
     }
   }
 );
+
+const recordLabelsModel = computed({
+  get: () => form.recordLabels ?? '',
+  set: (val: string) => {
+    form.recordLabels = val;
+  },
+});
+
+const passwordModel = computed({
+  get: () => form.password ?? '',
+  set: (val: string) => (form.password = val),
+});
 </script>
 
 <template>
   <div class="account-row">
     <RowsInput
-      v-model="form.recordLabels"
+      v-model="recordLabelsModel"
       placeholder="Введите метку"
       class="account-row__item"
       name="record-label"
       maxlength="50"
+      :error="errors.recordLabels"
+      @blur="
+        recordLabelsModel = normalizeLabelsInput(recordLabelsModel);
+        updateIfValid();
+      "
     />
-    <BaseSelect v-model="form.recordType" :options="recordTypeOptions" />
+    <BaseSelect
+      v-model="form.recordType"
+      :select-options="recordTypeOptions"
+      @change="updateIfValid()"
+    />
     <BaseInput
       v-model="form.login"
       :class="['account-row__item', { 'account-row__item_double': form.recordType === 'ldap' }]"
       placeholder="Введите логин"
       name="login"
       maxlength="100"
-      required
+      :error="errors.login"
+      @blur="
+        form.login = normalizeLoginInput(form.login);
+        updateIfValid();
+      "
     />
     <PasswordField
       v-if="form.recordType !== 'ldap'"
-      v-model="form.password"
+      v-model="passwordModel"
       class="account-row__item"
       name="password"
       maxlength="100"
-      required
+      :error="errors.password"
+      @blur="
+        form.password = normalizePasswordInput(form.password);
+        updateIfValid();
+      "
     />
     <IconButton icon="trash" @click="onRemove" />
   </div>

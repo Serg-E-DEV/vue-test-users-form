@@ -40,7 +40,6 @@ const accountsStore = useAccountsStore();
             class="accounts-section__row"
           />
         </div>
-        {{ accountsStore.accounts }}
       </section>
     </main>
   </div>

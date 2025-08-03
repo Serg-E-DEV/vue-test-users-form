@@ -9,6 +9,7 @@ interface Props {
   placeholder?: string;
   disabled?: boolean;
   required?: boolean;
+  error?: boolean;
 }
 
 withDefaults(defineProps<Props>(), {
@@ -16,28 +17,28 @@ withDefaults(defineProps<Props>(), {
   placeholder: 'Введите пароль',
   disabled: false,
   required: false,
+  error: false,
 });
+
+const emit = defineEmits(['blur']);
 
 const model = defineModel<string | null>({ required: true, default: '' });
 
 const isVisible = ref(false);
 const inputType = computed(() => (isVisible.value ? 'text' : 'password'));
-
-const normalizedModel = computed({
-  get: () => model.value ?? '',
-  set: (val) => (model.value = val),
-});
 </script>
 
 <template>
   <div class="password-field">
     <BaseInput
-      v-model="normalizedModel"
+      v-model="model"
       :type="inputType"
       class="password-field__input"
       :placeholder="placeholder"
       :name="name"
       :required="required"
+      :error="error"
+      @blur="(e) => emit('blur', e)"
     />
     <IconButton
       :class="['password-field__button', { 'password-field__button_inactive': !isVisible }]"

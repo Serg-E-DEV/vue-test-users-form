@@ -4,11 +4,13 @@ interface Props {
   type?: string;
   placeholder?: string;
   disabled?: boolean;
+  error?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   type: 'text',
   placeholder: 'Введите значение',
   disabled: false,
+  error: false,
 });
 </script>
 
@@ -18,7 +20,7 @@ const props = withDefaults(defineProps<Props>(), {
     :type="props.type"
     :placeholder="props.placeholder"
     :disabled="disabled"
-    class="base-input"
+    :class="['base-input', { 'base-input_invalid': props.error }]"
   />
 </template>
 
