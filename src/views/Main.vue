@@ -3,6 +3,7 @@ import SpriteIcon from '@/components/SpriteIcon.vue';
 import BaseButton from '@/components/BaseButton.vue';
 import BaseInput from '@/components/BaseInput.vue';
 import IconButton from '@/components/IconButton.vue';
+import PasswordField from '@/components/passwordField.vue';
 
 import { ref } from 'vue';
 import { FormInterface } from '@/interfaces/form.interface';
@@ -63,13 +64,10 @@ const form = ref<FormInterface>({
               name="login"
               required
             />
-            <BaseInput
+            <PasswordField
               v-if="n !== 2"
               v-model="form.password"
               class="accounts-section__row-item"
-              type="password"
-              placeholder="Введите пароль"
-              name="password"
               required
             />
             <IconButton icon="trash" />
