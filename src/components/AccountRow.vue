@@ -7,8 +7,9 @@ import BaseSelect from '@/components/BaseSelect.vue';
 
 import { reactive, watch } from 'vue';
 import { useAccountsStore } from '@/stores/accounts.store';
-import { AccountInterface } from '@/interfaces/account.interface';
+import { stringToRecordLabels } from '@/modules/utils';
 import { FormInterface } from '@/interfaces/form.interface';
+import { AccountInterface } from '@/interfaces/account.interface';
 
 interface Props {
   account: AccountInterface;
@@ -24,7 +25,7 @@ const recordTypeOptions = [
 ];
 
 const form = reactive<FormInterface>({
-  recordLabel: props.account.recordLabel,
+  recordLabels: props.account.recordLabels.map((label) => label.text).join('; '),
   recordType: props.account.recordType,
   login: props.account.login,
   password: props.account.password,
@@ -36,8 +37,12 @@ function onRemove() {
 
 watch(
   () => ({ ...form }),
-  (newValue) => {
-    accountsStore.updateAccount({ id: props.account.id, ...newValue });
+  (changedForm) => {
+    accountsStore.updateAccount({
+      id: props.account.id,
+      ...changedForm,
+      recordLabels: stringToRecordLabels(changedForm.recordLabels),
+    });
   },
   { deep: true }
 );
@@ -55,7 +60,7 @@ watch(
 <template>
   <div class="account-row">
     <RowsInput
-      v-model="form.recordLabel"
+      v-model="form.recordLabels"
       placeholder="Введите метку"
       class="account-row__item"
       name="record-label"

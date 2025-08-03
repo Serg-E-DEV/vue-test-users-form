@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
 import { nanoid } from 'nanoid';
 import { AccountInterface } from '@/interfaces/account.interface';
+import { stringToRecordLabels } from '@/modules/utils';
 
 const ACCOUNTS_STORAGE_KEY = 'accounts-storage';
 
@@ -28,7 +29,7 @@ export const useAccountsStore = defineStore('AccountsStore', () => {
   function createAccount() {
     const newAccount: AccountInterface = {
       id: nanoid(),
-      recordLabel: 'XXX; YYYY; II; MMM',
+      recordLabels: stringToRecordLabels('XXX; YYYY; II; MMM'),
       recordType: 'local',
       login: '',
       password: '',
@@ -45,8 +46,12 @@ export const useAccountsStore = defineStore('AccountsStore', () => {
   }
 
   function updateAccount(updatedAccount: AccountInterface) {
-    accounts.value = accounts.value.map((account) =>
-      account.id === updatedAccount.id ? { ...updatedAccount } : account
+    accounts.value = accounts.value.map((account: AccountInterface) =>
+      account.id === updatedAccount.id
+        ? {
+            ...updatedAccount,
+          }
+        : account
     );
   }
 
