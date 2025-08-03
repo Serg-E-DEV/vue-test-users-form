@@ -52,8 +52,6 @@ function onRemove() {
 
 function updateIfValid() {
   if (!validateForm(form, errors)) {
-    console.error('Валидация не пройдена');
-    console.log(form, errors);
     return;
   }
 
