@@ -29,10 +29,10 @@ export const useAccountsStore = defineStore('AccountsStore', () => {
   function createAccount() {
     const newAccount: AccountInterface = {
       id: nanoid(),
-      recordLabels: stringToRecordLabels('AAA; BBB; CCC'),
+      recordLabels: stringToRecordLabels(''),
       recordType: 'local',
-      login: 'Значение',
-      password: '1',
+      login: '',
+      password: '',
     };
 
     accounts.value.push(newAccount);
