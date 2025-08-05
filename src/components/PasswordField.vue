@@ -7,6 +7,7 @@ import { computed, ref } from 'vue';
 interface Props {
   name?: string;
   placeholder?: string;
+  maxlength?: number;
   disabled?: boolean;
   required?: boolean;
   error?: boolean;
@@ -15,6 +16,7 @@ interface Props {
 withDefaults(defineProps<Props>(), {
   name: 'password',
   placeholder: 'Введите пароль',
+  maxlength: 100,
   disabled: false,
   required: false,
   error: false,
@@ -35,6 +37,7 @@ const inputType = computed(() => (isVisible.value ? 'text' : 'password'));
       :type="inputType"
       class="password-field__input"
       :placeholder="placeholder"
+      :maxlength="maxlength"
       :name="name"
       :required="required"
       :error="error"

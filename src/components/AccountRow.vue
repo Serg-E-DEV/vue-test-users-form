@@ -40,7 +40,6 @@ const form = reactive<FormInterface>({
 });
 
 const errors = reactive<ErrorsInterface>({
-  recordLabels: false,
   login: false,
   password: false,
   recordType: false,
@@ -92,11 +91,7 @@ const passwordModel = computed({
       class="account-row__item"
       name="record-label"
       maxlength="50"
-      :error="errors.recordLabels"
-      @blur="
-        recordLabelsModel = normalizeLabelsInput(recordLabelsModel);
-        updateIfValid();
-      "
+      @blur="recordLabelsModel = normalizeLabelsInput(recordLabelsModel)"
     />
     <BaseSelect
       v-model="form.recordType"
@@ -122,7 +117,7 @@ const passwordModel = computed({
       v-model="passwordModel"
       class="account-row__item"
       name="password"
-      maxlength="100"
+      :maxlength="100"
       :error="errors.password"
       @blur="
         form.password = normalizePasswordInput(form.password);

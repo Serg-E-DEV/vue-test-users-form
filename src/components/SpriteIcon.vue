@@ -27,7 +27,7 @@ const href = computed(() => `${rootPath}sprites/${props.sprite}.svg#icon-${props
     :width="props.width"
     :height="props.height"
   >
-    <use :xlink:href="href" :href="href"></use>
+    <use :href="href"></use>
   </svg>
 </template>
 
