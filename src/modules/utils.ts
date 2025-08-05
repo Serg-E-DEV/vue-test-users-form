@@ -11,7 +11,9 @@ export function normalizeLabelsInput(labelsText: string): string {
     .split(';')
     .map((label) => label.trim().replace(/ /g, ''))
     .filter((label) => label !== '');
-  return labels.join('; ');
+  normalized = labels.join('; ');
+  normalized = normalized.slice(0, 50);
+  return normalized;
 }
 
 export function normalizeLoginInput(loginText: string): string {

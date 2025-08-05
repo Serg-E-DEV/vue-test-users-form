@@ -23,7 +23,10 @@ export const useAccountsStore = defineStore('AccountsStore', () => {
   }
 
   function saveAccounts() {
-    localStorage.setItem(ACCOUNTS_STORAGE_KEY, JSON.stringify(accounts.value));
+    const validatedAccounts: AccountInterface[] = accounts.value.filter(
+      (account: AccountInterface) => account.validated
+    );
+    localStorage.setItem(ACCOUNTS_STORAGE_KEY, JSON.stringify(validatedAccounts));
   }
 
   function createAccount() {
@@ -33,11 +36,12 @@ export const useAccountsStore = defineStore('AccountsStore', () => {
       recordType: 'local',
       login: '',
       password: '',
+      validated: false,
     };
 
     accounts.value.push(newAccount);
-    saveAccounts();
   }
+
   function removeAccount(id: string) {
     if (!id) {
       return;

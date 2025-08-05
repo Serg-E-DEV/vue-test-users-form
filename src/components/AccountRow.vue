@@ -58,6 +58,7 @@ function updateIfValid() {
     id: props.account.id,
     ...form,
     recordLabels: stringToRecordLabels(form.recordLabels),
+    validated: true,
   });
 }
 
@@ -91,7 +92,10 @@ const passwordModel = computed({
       class="account-row__item"
       name="record-label"
       maxlength="50"
-      @blur="recordLabelsModel = normalizeLabelsInput(recordLabelsModel)"
+      @blur="
+        recordLabelsModel = normalizeLabelsInput(recordLabelsModel);
+        updateIfValid();
+      "
     />
     <BaseSelect
       v-model="form.recordType"

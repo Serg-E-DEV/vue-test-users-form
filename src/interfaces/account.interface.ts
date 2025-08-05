@@ -6,4 +6,5 @@ export interface AccountInterface {
   recordType: 'local' | 'ldap';
   login: string;
   password: string | null;
+  validated: boolean;
 }
