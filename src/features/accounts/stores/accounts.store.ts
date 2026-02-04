@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
 import { nanoid } from 'nanoid';
-import { AccountInterface } from '@/interfaces/account.interface';
-import { stringToRecordLabels } from '@/modules/utils';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { AccountInterface } from '@/features/accounts/types/account.interface';
+import { stringToRecordLabels } from '@/features/accounts/libs/accountUtils';
+import { useLocalStorage } from '@/shared/libs/useLocalStorage';
 
 export const useAccountsStore = defineStore('AccountsStore', () => {
   const accounts = ref<AccountInterface[]>([]);

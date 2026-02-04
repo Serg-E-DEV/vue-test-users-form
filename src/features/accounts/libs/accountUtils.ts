@@ -1,4 +1,4 @@
-import { RecordLabels } from '@/interfaces/recordLabel.interface';
+import { RecordLabels } from '@/features/accounts/types/recordLabel.interface';
 
 export function normalizeLabelsInput(labelsText: string): string {
   if (!labelsText) {

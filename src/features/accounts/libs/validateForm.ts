@@ -1,5 +1,5 @@
-import { FormInterface } from '@/interfaces/form.interface';
-import { ErrorsInterface } from '@/interfaces/errors.interface';
+import { FormInterface } from '@/features/accounts/types/form.interface';
+import { ErrorsInterface } from '@/features/accounts/types/errors.interface';
 
 export function validateForm(form: FormInterface, errors: ErrorsInterface): boolean {
   errors.login = form.login === '';

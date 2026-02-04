@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import RowsInput from '@/components/RowsInput.vue';
-import IconButton from '@/components/IconButton.vue';
-import PasswordField from '@/components/PasswordField.vue';
-import BaseInput from '@/components/BaseInput.vue';
-import BaseSelect from '@/components/BaseSelect.vue';
+import RowsInput from '@/shared/ui/RowsInput.vue';
+import IconButton from '@/shared/ui/IconButton.vue';
+import PasswordField from '@/shared/ui/PasswordField.vue';
+import BaseInput from '@/shared/ui/BaseInput.vue';
+import BaseSelect from '@/shared/ui/BaseSelect.vue';
 
-import { FormInterface } from '@/interfaces/form.interface';
-import { AccountInterface } from '@/interfaces/account.interface';
-import { ErrorsInterface } from '@/interfaces/errors.interface';
+import { FormInterface } from '@/features/accounts/types/form.interface';
+import { ErrorsInterface } from '@/features/accounts/types/errors.interface';
+import { AccountInterface } from '@/features/accounts/types/account.interface';
 
 import { computed, reactive, watch } from 'vue';
-import { useAccountsStore } from '@/stores/accounts.store';
+import { useAccountsStore } from '@/features/accounts/stores/accounts.store';
 import {
   normalizeLabelsInput,
   normalizeLoginInput,
   normalizePasswordInput,
   stringToRecordLabels,
-} from '@/modules/utils';
-import { validateForm } from '@/modules/validateForm';
+} from '@/features/accounts/libs/accountUtils';
+import { validateForm } from '@/features/accounts/libs/validateForm';
 
 interface Props {
   account: AccountInterface;

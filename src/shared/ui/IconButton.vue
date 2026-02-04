@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ResetButton from '@/components/ResetButton.vue';
-import SpriteIcon from '@/components/SpriteIcon.vue';
+import ResetButton from '@/shared/ui/ResetButton.vue';
+import SpriteIcon from '@/shared/ui/SpriteIcon.vue';
 
 interface Props {
   sprite?: string;

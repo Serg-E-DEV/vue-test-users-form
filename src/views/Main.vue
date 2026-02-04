@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import SpriteIcon from '@/components/SpriteIcon.vue';
-import BaseButton from '@/components/BaseButton.vue';
-import AccountRow from '@/components/AccountRow.vue';
+import SpriteIcon from '@/shared/ui/SpriteIcon.vue';
+import BaseButton from '@/shared/ui/BaseButton.vue';
+import AccountRow from '@/features/accounts/ui/AccountRow.vue';
 
-import { useAccountsStore } from '@/stores/accounts.store';
+import { useAccountsStore } from '@/features/accounts/stores/accounts.store';
 
 const accountsStore = useAccountsStore();
 </script>

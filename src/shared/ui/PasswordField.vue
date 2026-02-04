@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import IconButton from '@/components/IconButton.vue';
-import BaseInput from '@/components/BaseInput.vue';
+import IconButton from '@/shared/ui/IconButton.vue';
+import BaseInput from '@/shared/ui/BaseInput.vue';
 
 import { computed, ref } from 'vue';
 
