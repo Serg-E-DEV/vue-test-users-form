@@ -3,28 +3,25 @@ import { ref, watch } from 'vue';
 import { nanoid } from 'nanoid';
 import { AccountInterface } from '@/interfaces/account.interface';
 import { stringToRecordLabels } from '@/modules/utils';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 export const useAccountsStore = defineStore('AccountsStore', () => {
   const accounts = ref<AccountInterface[]>([]);
+  const { getItem, setItem } = useLocalStorage<AccountInterface[]>('accounts-storage');
 
   function loadAccounts() {
-    const accountsData = localStorage.getItem('accounts-storage');
+    const accountsData = getItem();
     if (!accountsData) {
       return;
     }
-    try {
-      accounts.value = JSON.parse(accountsData);
-    } catch (e) {
-      accounts.value = [];
-      console.error(e);
-    }
+    accounts.value = accountsData;
   }
 
   function saveAccounts() {
     const validatedAccounts: AccountInterface[] = accounts.value.filter(
       (account: AccountInterface) => account.validated
     );
-    localStorage.setItem('accounts-storage', JSON.stringify(validatedAccounts));
+    setItem(validatedAccounts);
   }
 
   function createAccount() {
