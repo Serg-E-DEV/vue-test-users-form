@@ -4,13 +4,11 @@ import { nanoid } from 'nanoid';
 import { AccountInterface } from '@/interfaces/account.interface';
 import { stringToRecordLabels } from '@/modules/utils';
 
-const ACCOUNTS_STORAGE_KEY = 'accounts-storage';
-
 export const useAccountsStore = defineStore('AccountsStore', () => {
   const accounts = ref<AccountInterface[]>([]);
 
   function loadAccounts() {
-    const accountsData = localStorage.getItem(ACCOUNTS_STORAGE_KEY);
+    const accountsData = localStorage.getItem('accounts-storage');
     if (!accountsData) {
       return;
     }
@@ -26,7 +24,7 @@ export const useAccountsStore = defineStore('AccountsStore', () => {
     const validatedAccounts: AccountInterface[] = accounts.value.filter(
       (account: AccountInterface) => account.validated
     );
-    localStorage.setItem(ACCOUNTS_STORAGE_KEY, JSON.stringify(validatedAccounts));
+    localStorage.setItem('accounts-storage', JSON.stringify(validatedAccounts));
   }
 
   function createAccount() {
